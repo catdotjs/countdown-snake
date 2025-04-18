@@ -8,6 +8,7 @@
  * ncurses
  * thats it...
  */
+
 #include <algorithm>
 #include <chrono>
 #include <csignal>
@@ -51,7 +52,7 @@ struct vec2 {
 
 class Game {
 public:
-  Game(uint16_t boardX = 40, uint16_t boardY = 60, uint16_t framesPerSec = 20)
+  Game(uint16_t boardX = 90, uint16_t boardY = 30, uint16_t framesPerSec = 10)
       : delay(1000 / framesPerSec), boardSize(boardX, boardY),
         snakeHead(boardX / 2, boardY / 2), GameBoard(boardX * boardY, 0),
         snakeDir(0, -1) {
@@ -190,7 +191,7 @@ std::unique_ptr<Game> game;
 void handleSignal(int signal) { game->end(); }
 
 int main(int argc, char *argv[]) {
-  game = std::make_unique<Game>(90, 30, 10);
+  game = std::make_unique<Game>();
   std::signal(SIGTERM, handleSignal);
   std::signal(SIGINT, handleSignal);
   game->start();
